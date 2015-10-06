@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 import RPi.GPIO as GPIO
 import sys
-import collections
 import time
 
 # connectors = collections.OrderedDict()
@@ -15,13 +14,7 @@ delay = 0.01
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 
-# GPIO.setup(button, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-# GPIO.setup(led, GPIO.OUT)
-
-# GPIO.output(led, GPIO.HIGH)
-light = True
-
-# Setup our button map
+# Setup our button_pin->light_pin map
 global buttons
 buttons = {}
 buttons['11'] = 13
@@ -29,6 +22,7 @@ buttons['16'] = 18
 buttons['29'] = 31
 buttons['33'] = 37
 
+# Track light state
 global lights
 lights = {}
 
@@ -44,7 +38,7 @@ def button_press(channel):
   global lights
 
   pressed_button = str(channel)
-
+  
   if pressed_button in buttons.keys():
     light_pin = buttons[pressed_button]
     light = lights[light_pin]
@@ -63,17 +57,11 @@ def button_press(channel):
     print("That's weird: Signal from pin %s received, but I don't think it's a button." % (pressed_button))
 
 
-
-
-
 try:
   for button in buttons.keys():
     GPIO.add_event_detect(int(button), GPIO.RISING, callback=button_press, bouncetime=300)
 
-  while True:
-    # TODO: Sleep here
-    time.sleep(delay)
-    pass
+  while True: time.sleep(delay)
 
 except Exception as e:
   print("ERROR: Exception %s on line %s." % (e,sys.exc_traceback.tb_lineno))
