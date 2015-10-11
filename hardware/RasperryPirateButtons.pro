@@ -1,4 +1,4 @@
-update=Saturday, September 26, 2015 'PMt' 03:52:28 PM
+update=Saturday, October 10, 2015 'PMt' 03:16:41 PM
 version=1
 last_client=kicad
 [cvpcb]
@@ -30,7 +30,7 @@ LibDir=
 LibName1=hat-design-lib
 [eeschema]
 version=1
-LibDir=
+LibDir=/Applications/Kicad/lib
 [eeschema/libraries]
 LibName1=hat-design-rescue
 LibName2=74xgxx
